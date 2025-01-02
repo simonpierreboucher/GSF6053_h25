@@ -1,0 +1,392 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "GSF-6053 (Notebook R)",
+    "section": "",
+    "text": "Preface\n\n\n\n\n\n\nUniversité Laval\nFaculté des sciences de l’administration\nDépartement de finance, assurance et immobilier\nÉconométrie Financière\nGSF-6053\nHiver 2025\n\nBienvenue dans le carnet de code dédié au cours d’économétrie financière GSF-6053 de l’hiver 2025. Ce document a été conçu pour accompagner les étudiants dans leur apprentissage des concepts et des méthodes d’économétrie appliqués aux marchés financiers, en utilisant le langage R, un outil puissant et polyvalent largement adopté dans le domaine de la finance quantitative.\nAu cours de cette session, nous aborderons plusieurs thématiques clés de l’économétrie financière, notamment :\n\nLes Moindres Carrés Ordinaires (MCO) : Nous explorerons la méthode des moindres carrés ordinaires, une technique fondamentale pour estimer les paramètres des modèles linéaires. Vous apprendrez à appliquer les MCO dans divers contextes financiers, à interpréter les résultats et à évaluer la qualité des ajustements.\nLes Tests d’Hypothèses Essentiels : Une compréhension solide des tests d’hypothèses est cruciale pour valider les modèles économétriques. Nous couvrirons les tests t, les tests F, ainsi que d’autres tests statistiques essentiels pour vérifier la significativité des variables et la validité des hypothèses sous-jacentes aux modèles.\nLe Maximum de Vraisemblance (Maximum Likelihood) : Nous introduirons la méthode du maximum de vraisemblance, une approche puissante pour estimer les paramètres des modèles économétriques complexes. Cette section inclura des exemples d’application en finance, tels que l’estimation des modèles de volatilité et des modèles de choix discret.\nLes Séries Temporelles : L’analyse des séries temporelles est indispensable pour comprendre les dynamiques des marchés financiers. Nous étudierons les modèles ARIMA, les processus GARCH et d’autres techniques avancées pour analyser et prévoir les comportements des séries financières.\nLes Données de Panel : Les données de panel, qui combinent des dimensions temporelles et transversales, offrent une richesse analytique pour étudier les effets spécifiques et dynamiques. Nous apprendrons à manipuler et analyser ces données pour extraire des informations pertinentes sur les performances financières et les comportements des acteurs du marché.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "1  Introduction",
+    "section": "",
+    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "2  Summary",
+    "section": "",
+    "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Summary</span>"
+    ]
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
+    "crumbs": [
+      "References"
+    ]
+  },
+  {
+    "objectID": "Sommation.html",
+    "href": "Sommation.html",
+    "title": "1  Les Propriétés des Sommations, Doubles Sommations et Produits",
+    "section": "",
+    "text": "1.1 Propriétés des Sommations",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Les Propriétés des Sommations, Doubles Sommations et Produits</span>"
+    ]
+  },
+  {
+    "objectID": "Sommation.html#propriétés-des-sommations",
+    "href": "Sommation.html#propriétés-des-sommations",
+    "title": "1  Les Propriétés des Sommations, Doubles Sommations et Produits",
+    "section": "",
+    "text": "1.1.1 Linéarité de la Sommation\nLa linéarité de la sommation stipule que la somme de deux vecteurs est égale à la somme des sommes individuelles de chaque vecteur.\n\\[\\sum_{i=1}^{n} (a_i + b_i) = \\sum_{i=1}^{n} a_i + \\sum_{i=1}^{n} b_i\\]\n\n# Vecteurs d'exemple\na &lt;- c(1, 2, 3, 4, 5)\nb &lt;- c(5, 4, 3, 2, 1)\n\n# Somme des sommes individuelles\nsum_a_plus_sum_b &lt;- sum(a) + sum(b)\n\n# Somme des vecteurs additionnés\nsum_a_plus_b &lt;- sum(a + b)\n\n# Affichage des résultats\ncat(\"Somme(a) + Somme(b) =\", sum_a_plus_sum_b, \"\\n\")\n\nSomme(a) + Somme(b) = 30 \n\ncat(\"Somme(a + b) =\", sum_a_plus_b, \"\\n\")\n\nSomme(a + b) = 30 \n\n\nInterprétation : Les deux méthodes de sommation donnent le même résultat, confirmant la linéarité de la sommation.\n\n\n1.1.2 Sommation d’une Constante Multipliée par un Vecteur\n\\[\\sum_{i=1}^{n} c \\cdot a_i = c \\cdot \\sum_{i=1}^{n} a_i\\]\n\n# Constante\nc &lt;- 3\n\n# Somme de c * a_i\nsum_c_a &lt;- sum(c * a)\n\n# Somme a_i multiplié par c\nc_sum_a &lt;- c * sum(a)\n\n# Affichage des résultats\ncat(\"Somme(c * a_i) =\", sum_c_a, \"\\n\")\n\nSomme(c * a_i) = 45 \n\ncat(\"c * Somme(a_i) =\", c_sum_a, \"\\n\")\n\nc * Somme(a_i) = 45 \n\n\nInterprétation : La multiplication par une constante peut être effectuée avant ou après la sommation sans changer le résultat.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Les Propriétés des Sommations, Doubles Sommations et Produits</span>"
+    ]
+  },
+  {
+    "objectID": "Sommation.html#propriétés-des-doubles-sommations",
+    "href": "Sommation.html#propriétés-des-doubles-sommations",
+    "title": "1  Les Propriétés des Sommations, Doubles Sommations et Produits",
+    "section": "1.2 Propriétés des Doubles Sommations",
+    "text": "1.2 Propriétés des Doubles Sommations\n\n1.2.1 Commutation des Indices dans les Doubles Sommations\n\\[\\sum_{i=1}^{n} \\sum_{j=1}^{m} a_{ij} = \\sum_{j=1}^{m} \\sum_{i=1}^{n} a_{ij}\\]\n\n# Création d'une matrice\nset.seed(123)\nA &lt;- matrix(sample(1:20, 12, replace = TRUE), nrow = 3, ncol = 4)\nprint(\"Matrice A :\")\n\n[1] \"Matrice A :\"\n\nprint(A)\n\n     [,1] [,2] [,3] [,4]\n[1,]   15    3   11   14\n[2,]   19   10    5    5\n[3,]   14   18   20   19\n\n# Double sommation en ordre (i, j)\ndouble_sum_ij &lt;- sum(A)\n\n# Double sommation en ordre (j, i)\ndouble_sum_ji &lt;- sum(A)\n\n# Affichage des résultats\ncat(\"Double Sommation (i, j) =\", double_sum_ij, \"\\n\")\n\nDouble Sommation (i, j) = 153 \n\ncat(\"Double Sommation (j, i) =\", double_sum_ji, \"\\n\")\n\nDouble Sommation (j, i) = 153 \n\n\nInterprétation : Peu importe l’ordre des indices dans les doubles sommations, le résultat reste le même.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Les Propriétés des Sommations, Doubles Sommations et Produits</span>"
+    ]
+  },
+  {
+    "objectID": "Sommation.html#propriétés-des-produits",
+    "href": "Sommation.html#propriétés-des-produits",
+    "title": "1  Les Propriétés des Sommations, Doubles Sommations et Produits",
+    "section": "1.3 Propriétés des Produits",
+    "text": "1.3 Propriétés des Produits\n\n1.3.1 Associativité du Produit\n\\[(a \\cdot b) \\cdot c = a \\cdot (b \\cdot c)\\]\n\n# Valeurs\na &lt;- 2\nb &lt;- 3\nc &lt;- 4\n\n# Calcul des deux côtés de l'équation\nleft_side &lt;- (a * b) * c\nright_side &lt;- a * (b * c)\n\n# Affichage des résultats\ncat(\"(a * b) * c =\", left_side, \"\\n\")\n\n(a * b) * c = 24 \n\ncat(\"a * (b * c) =\", right_side, \"\\n\")\n\na * (b * c) = 24 \n\n\nInterprétation : L’ordre dans lequel les multiplications sont effectuées ne change pas le résultat, confirmant l’associativité.\n\n\n1.3.2 Distributivité du Produit par Rapport à la Sommation\n\\[a \\cdot \\sum_{i=1}^{n} b_i = \\sum_{i=1}^{n} (a \\cdot b_i)\\]\n\n# Constante\na &lt;- 5\n\n# Vecteur b\nb &lt;- c(2, 4, 6, 8)\n\n# Produit de a par la somme de b\nproduct_sum &lt;- a * sum(b)\n\n# Somme des produits individuels\nsum_product &lt;- sum(a * b)\n\n# Affichage des résultats\ncat(\"a * Somme(b) =\", product_sum, \"\\n\")\n\na * Somme(b) = 100 \n\ncat(\"Somme(a * b_i) =\", sum_product, \"\\n\")\n\nSomme(a * b_i) = 100 \n\n\nInterprétation : Le produit de (a) avec la somme de (b_i) est égal à la somme des produits individuels, illustrant la distributivité.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Les Propriétés des Sommations, Doubles Sommations et Produits</span>"
+    ]
+  },
+  {
+    "objectID": "Sommation.html#double-produits-et-sommations",
+    "href": "Sommation.html#double-produits-et-sommations",
+    "title": "1  Les Propriétés des Sommations, Doubles Sommations et Produits",
+    "section": "1.4 Double Produits et Sommations",
+    "text": "1.4 Double Produits et Sommations\n\n1.4.1 Produit de Deux Sommations\n\\[\\left( \\sum_{i=1}^{n} a_i \\right) \\cdot \\left( \\sum_{j=1}^{m} b_j \\right) = \\sum_{i=1}^{n} \\sum_{j=1}^{m} (a_i \\cdot b_j)\\]\n\n# Vecteurs\na &lt;- c(1, 2, 3)\nb &lt;- c(4, 5)\n\n# Produit des deux sommations\nproduct_of_sums &lt;- sum(a) * sum(b)\n\n# Double sommation des produits\ndouble_sum_product &lt;- sum(outer(a, b))\n\n# Affichage des résultats\ncat(\"Produit des Sommes =\", product_of_sums, \"\\n\")\n\nProduit des Sommes = 54 \n\ncat(\"Double Sommation des Produits =\", double_sum_product, \"\\n\")\n\nDouble Sommation des Produits = 54 \n\n\nInterprétation : Le produit des sommes des vecteurs (a) et (b) est égal à la double sommation des produits individuels, validant la propriété.\n\n\n1.4.2 Produit de Sommes avec une Constante\n\\[c \\cdot \\sum_{i=1}^{n} a_i \\cdot \\sum_{j=1}^{m} b_j = \\sum_{i=1}^{n} \\sum_{j=1}^{m} (c \\cdot a_i \\cdot b_j)\\]\n\n# Constante\nc &lt;- 2\n\n# Produit des deux sommations multiplié par c\nc_product_of_sums &lt;- c * sum(a) * sum(b)\n\n# Double sommation des produits multiplié par c\nc_double_sum_product &lt;- sum(outer(a, b)) * c\n\n# Affichage des résultats\ncat(\"c * Produit des Sommes =\", c_product_of_sums, \"\\n\")\n\nc * Produit des Sommes = 108 \n\ncat(\"c * Double Sommation des Produits =\", c_double_sum_product, \"\\n\")\n\nc * Double Sommation des Produits = 108 \n\n\nInterprétation : La multiplication par une constante (c) peut être effectuée avant ou après la sommation, sans changer le résultat final.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Les Propriétés des Sommations, Doubles Sommations et Produits</span>"
+    ]
+  },
+  {
+    "objectID": "Sommation.html#en-résumé",
+    "href": "Sommation.html#en-résumé",
+    "title": "1  Les Propriétés des Sommations, Doubles Sommations et Produits",
+    "section": "1.5 En résumé…",
+    "text": "1.5 En résumé…\nLes propriétés des sommations, des doubles sommations et des produits sont des outils puissants pour simplifier et manipuler les expressions mathématiques en économétrie. En maîtrisant ces propriétés, vous serez mieux équipé pour développer et analyser des modèles économétriques complexes. Les exemples présentés ici montrent comment appliquer ces propriétés dans le langage R, facilitant ainsi leur utilisation pratique dans vos analyses financières.\nN’hésitez pas à expérimenter davantage avec ces propriétés en modifiant les vecteurs, les matrices et les constantes pour renforcer votre compréhension.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Les Propriétés des Sommations, Doubles Sommations et Produits</span>"
+    ]
+  },
+  {
+    "objectID": "Density.html",
+    "href": "Density.html",
+    "title": "2  Les Fonctions de Densité",
+    "section": "",
+    "text": "2.1 Fonction de Densité de la Distribution Normale\nLa distribution normale, également connue sous le nom de distribution gaussienne, est l’une des distributions les plus couramment utilisées en statistique et en économétrie financière.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Les Fonctions de Densité</span>"
+    ]
+  },
+  {
+    "objectID": "Density.html#fonction-de-densité-de-la-distribution-normale",
+    "href": "Density.html#fonction-de-densité-de-la-distribution-normale",
+    "title": "2  Les Fonctions de Densité",
+    "section": "",
+    "text": "2.1.1 Génération et Tracé de la Densité Normale\n\n# Paramètres de la distribution normale\nmu &lt;- 0      # Moyenne\nsigma &lt;- 1   # Écart-type\n\n# Génération d'une séquence de valeurs\nx &lt;- seq(mu - 4*sigma, mu + 4*sigma, length.out = 1000)\n\n# Calcul de la densité théorique\ndensite_normale &lt;- dnorm(x, mean = mu, sd = sigma)\n\n# Tracé de la densité\nplot(x, densite_normale, type = \"l\", lwd = 2, col = \"blue\",\n     main = \"Fonction de Densité de la Distribution Normale\",\n     xlab = \"Valeurs\", ylab = \"Densité\")\ngrid()\n\n\n\n\n\n\n\n\nExplications : - dnorm() : Calcule la densité de la distribution normale pour chaque valeur de x. - plot() : Trace la courbe de densité. - seq() : Génère une séquence de valeurs couvrant la plupart de la distribution.\n\n\n2.1.2 Simulation et Superposition avec la Densité Théorique\n\n# Génération de données simulées\nset.seed(123)\ndata_normale &lt;- rnorm(1000, mean = mu, sd = sigma)\n\n# Tracé de l'histogramme avec la densité théorique\nhist(data_normale, breaks = 30, probability = TRUE,\n     main = \"Histogramme avec Densité Normale\",\n     xlab = \"Valeurs\", col = \"lightblue\", border = \"black\")\ncurve(dnorm(x, mean = mu, sd = sigma), \n      col = \"red\", lwd = 2, add = TRUE)\nlegend(\"topright\", legend = c(\"Données\", \"Densité Théorique\"),\n       col = c(\"lightblue\", \"red\"), lwd = 2, fill = c(\"lightblue\", NA), border = c(\"black\", NA))\n\n\n\n\n\n\n\n\nInterprétation : L’histogramme des données simulées suit de près la courbe de densité théorique de la distribution normale, illustrant ainsi la correspondance entre les données empiriques et la distribution théorique.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Les Fonctions de Densité</span>"
+    ]
+  },
+  {
+    "objectID": "Density.html#fonction-de-densité-de-la-distribution-t-de-student",
+    "href": "Density.html#fonction-de-densité-de-la-distribution-t-de-student",
+    "title": "2  Les Fonctions de Densité",
+    "section": "2.2 Fonction de Densité de la Distribution t de Student",
+    "text": "2.2 Fonction de Densité de la Distribution t de Student\nLa distribution t de Student est particulièrement utile lorsque la taille de l’échantillon est petite et que la variance est inconnue.\n\n2.2.1 Génération et Tracé de la Densité t de Student\n# Paramètres de la distribution t\ndf &lt;- 10  # Degrés de liberté\n\n# Génération d'une séquence de valeurs\nx &lt;- seq(-4, 4, length.out = 1000)\n\n# Calcul de la densité théorique\ndensite_t &lt;- dt(x, df = df)\n\n# Tracé de la densité\nplot(x, densite_t, type = \"l\", lwd = 2, col = \"darkgreen\",\n     main = \"Fonction de Densité de la Distribution t de Student\",\n     xlab = \"Valeurs\", ylab = \"Densité\")\ngrid()\n\n\n2.2.2 Comparaison entre la Distribution Normale et t de Student\n\n# Nettoyer l'environnement\nrm(list = ls())\n\n# Définir les paramètres de la distribution t de Student\ndf &lt;- 10  # Degrés de liberté\n\n# Générer une séquence de valeurs numériques\nx &lt;- seq(-4, 4, length.out = 1000)\n\n# Vérifier que x est numérique\nif(!is.numeric(x)) {\n  stop(\"Erreur : x doit être un vecteur numérique.\")\n}\n\n# Calcul de la densité théorique\ndensite_t &lt;- dt(x, df = df)\n\n# Vérifier que densite_t est numérique\nif(!is.numeric(densite_t)) {\n  stop(\"Erreur : densite_t doit être un vecteur numérique.\")\n}\n\n# Tracé de la densité t de Student\nplot(x, densite_t, type = \"l\", lwd = 2, col = \"darkgreen\",\n     main = \"Fonction de Densité de la Distribution t de Student\",\n     xlab = \"Valeurs\", ylab = \"Densité\")\ngrid()\n\n\n\n\n\n\n\n# Comparaison avec la distribution normale\ndensite_normale &lt;- dnorm(x, mean = 0, sd = 1)\n\n# Vérifier que densite_normale est numérique\nif(!is.numeric(densite_normale)) {\n  stop(\"Erreur : densite_normale doit être un vecteur numérique.\")\n}\n\n# Tracé comparatif\nplot(x, densite_normale, type = \"l\", lwd = 2, col = \"blue\",\n     main = \"Comparaison des Densités Normale et t de Student\",\n     xlab = \"Valeurs\", ylab = \"Densité\")\nlines(x, densite_t, col = \"darkgreen\", lwd = 2, lty = 2)\nlegend(\"topright\", legend = c(\"Normale\", \"t de Student\"),\n       col = c(\"blue\", \"darkgreen\"), lwd = 2, lty = c(1, 2))\n\n\n\n\n\n\n\n\nInterprétation : La distribution t de Student présente des queues plus épaisses que la distribution normale, ce qui reflète une plus grande probabilité d’observer des valeurs extrêmes.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Les Fonctions de Densité</span>"
+    ]
+  },
+  {
+    "objectID": "Density.html#fonction-de-densité-de-la-distribution-exponentielle",
+    "href": "Density.html#fonction-de-densité-de-la-distribution-exponentielle",
+    "title": "2  Les Fonctions de Densité",
+    "section": "2.3 Fonction de Densité de la Distribution Exponentielle",
+    "text": "2.3 Fonction de Densité de la Distribution Exponentielle\nLa distribution exponentielle est souvent utilisée pour modéliser le temps entre des événements indépendants.\n\n2.3.1 Génération et Tracé de la Densité Exponentielle\n\n# Paramètres de la distribution exponentielle\nrate &lt;- 1  # Taux\n\n# Génération d'une séquence de valeurs\nx &lt;- seq(0, 8, length.out = 1000)\n\n# Calcul de la densité théorique\ndensite_exp &lt;- dexp(x, rate = rate)\n\n# Tracé de la densité\nplot(x, densite_exp, type = \"l\", lwd = 2, col = \"purple\",\n     main = \"Fonction de Densité de la Distribution Exponentielle\",\n     xlab = \"Valeurs\", ylab = \"Densité\")\ngrid()",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Les Fonctions de Densité</span>"
+    ]
+  },
+  {
+    "objectID": "Density.html#fonction-de-densité-de-la-distribution-log-normale",
+    "href": "Density.html#fonction-de-densité-de-la-distribution-log-normale",
+    "title": "2  Les Fonctions de Densité",
+    "section": "2.4 Fonction de Densité de la Distribution Log-Normale",
+    "text": "2.4 Fonction de Densité de la Distribution Log-Normale\nLa distribution log-normale est utilisée pour modéliser des variables dont les logarithmes suivent une distribution normale, couramment rencontrée dans les prix des actifs financiers.\n\n2.4.1 Génération et Tracé de la Densité Log-Normale\n\n# Paramètres de la distribution log-normale\nmeanlog &lt;- 0     # Moyenne du log\nsdlog &lt;- 0.5     # Écart-type du log\n\n# Génération d'une séquence de valeurs\nx &lt;- seq(0, 3, length.out = 1000)\n\n# Calcul de la densité théorique\ndensite_lognormale &lt;- dlnorm(x, meanlog = meanlog, sdlog = sdlog)\n\n# Tracé de la densité\nplot(x, densite_lognormale, type = \"l\", lwd = 2, col = \"orange\",\n     main = \"Fonction de Densité de la Distribution Log-Normale\",\n     xlab = \"Valeurs\", ylab = \"Densité\")\ngrid()\n\n\n\n\n\n\n\n\n\n\n2.4.2 Simulation et Superposition avec la Densité Théorique\n\n# Génération de données simulées\nset.seed(456)\ndata_lognormale &lt;- rlnorm(1000, meanlog = meanlog, sdlog = sdlog)\n\n# Tracé de l'histogramme avec la densité théorique\nhist(data_lognormale, breaks = 30, probability = TRUE,\n     main = \"Histogramme avec Densité Log-Normale\",\n     xlab = \"Valeurs\", col = \"peachpuff\", border = \"black\")\ncurve(dlnorm(x, meanlog = meanlog, sdlog = sdlog), \n      col = \"blue\", lwd = 2, add = TRUE)\nlegend(\"topright\", legend = c(\"Données\", \"Densité Théorique\"),\n       col = c(\"peachpuff\", \"blue\"), lwd = 2, fill = c(\"peachpuff\", NA), border = c(\"black\", NA))\n\n\n\n\n\n\n\n\nInterprétation : L’histogramme des données simulées suit la courbe de densité théorique de la distribution log-normale, illustrant la modélisation adéquate des données asymétriques.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Les Fonctions de Densité</span>"
+    ]
+  },
+  {
+    "objectID": "Density.html#fonction-de-densité-de-la-distribution-de-poisson",
+    "href": "Density.html#fonction-de-densité-de-la-distribution-de-poisson",
+    "title": "2  Les Fonctions de Densité",
+    "section": "2.5 Fonction de Densité de la Distribution de Poisson",
+    "text": "2.5 Fonction de Densité de la Distribution de Poisson\nBien que la distribution de Poisson soit une distribution discrète, elle est souvent utilisée pour modéliser le nombre d’événements dans un intervalle fixe.\n\n2.5.1 Génération et Tracé de la Densité de Poisson\n\n# Paramètres de la distribution de Poisson\nlambda &lt;- 3  # Taux moyen d'événements\n\n# Génération d'une séquence de valeurs entières\nx &lt;- 0:10\n\n# Calcul de la densité théorique\ndensite_poisson &lt;- dpois(x, lambda = lambda)\n\n# Tracé de la densité\nplot(x, densite_poisson, type = \"h\", lwd = 2, col = \"darkred\",\n     main = \"Fonction de Densité de la Distribution de Poisson\",\n     xlab = \"Nombre d'Événements\", ylab = \"Probabilité\")\npoints(x, densite_poisson, pch = 16, col = \"darkred\")\ngrid()",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Les Fonctions de Densité</span>"
+    ]
+  },
+  {
+    "objectID": "Density.html#fonction-de-densité-de-la-distribution-beta",
+    "href": "Density.html#fonction-de-densité-de-la-distribution-beta",
+    "title": "2  Les Fonctions de Densité",
+    "section": "2.6 Fonction de Densité de la Distribution Beta",
+    "text": "2.6 Fonction de Densité de la Distribution Beta\nLa distribution Beta est utile pour modéliser des variables aléatoires continues limitées à l’intervalle [0, 1], souvent utilisées dans la finance pour représenter des proportions ou des probabilités.\n\n2.6.1 Génération et Tracé de la Densité Beta\n\n# Paramètres de la distribution Beta\nalpha &lt;- 2\nbeta &lt;- 5\n\n# Génération d'une séquence de valeurs\nx &lt;- seq(0, 1, length.out = 1000)\n\n# Calcul de la densité théorique\ndensite_beta &lt;- dbeta(x, shape1 = alpha, shape2 = beta)\n\n# Tracé de la densité\nplot(x, densite_beta, type = \"l\", lwd = 2, col = \"brown\",\n     main = \"Fonction de Densité de la Distribution Beta\",\n     xlab = \"Valeurs\", ylab = \"Densité\")\ngrid()",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Les Fonctions de Densité</span>"
+    ]
+  },
+  {
+    "objectID": "Density.html#visualisation-de-plusieurs-fonctions-de-densité-sur-un-même-graphique",
+    "href": "Density.html#visualisation-de-plusieurs-fonctions-de-densité-sur-un-même-graphique",
+    "title": "2  Les Fonctions de Densité",
+    "section": "2.7 Visualisation de Plusieurs Fonctions de Densité sur un Même Graphique",
+    "text": "2.7 Visualisation de Plusieurs Fonctions de Densité sur un Même Graphique\nComparer différentes distributions permet de mieux comprendre leurs caractéristiques et leurs applications.\n\n# Paramètres\nmu &lt;- 0\nsigma &lt;- 1\ndf &lt;- 10\nrate &lt;- 1\nmeanlog &lt;- 0\nsdlog &lt;- 0.5\n\n# Génération d'une séquence de valeurs pour les distributions continues\nx_cont &lt;- seq(-4, 4, length.out = 1000)\nx_lognorm &lt;- seq(0, 3, length.out = 1000)\nx_beta &lt;- seq(0, 1, length.out = 1000)\n\n# Calcul des densités\ndensite_normale &lt;- dnorm(x_cont, mean = mu, sd = sigma)\ndensite_t &lt;- dt(x_cont, df = df)\ndensite_exp &lt;- dexp(x_cont, rate = rate)\ndensite_lognormale &lt;- dlnorm(x_lognorm, meanlog = meanlog, sdlog = sdlog)\ndensite_beta &lt;- dbeta(x_beta, shape1 = alpha, shape2 = beta)\n\n# Tracé des densités normales et t de Student\nplot(x_cont, densite_normale, type = \"l\", lwd = 2, col = \"blue\",\n     main = \"Comparaison des Fonctions de Densité\",\n     xlab = \"Valeurs\", ylab = \"Densité\")\nlines(x_cont, densite_t, col = \"darkgreen\", lwd = 2, lty = 2)\nlegend(\"topright\", legend = c(\"Normale\", \"t de Student\"),\n       col = c(\"blue\", \"darkgreen\"), lwd = 2, lty = c(1, 2))\n\n\n\n\n\n\n\n# Tracé des densités exponentielle et log-normale\nplot(x_cont, densite_exp, type = \"l\", lwd = 2, col = \"purple\",\n     main = \"Comparaison des Fonctions de Densité\",\n     xlab = \"Valeurs\", ylab = \"Densité\")\nlines(x_lognorm, densite_lognormale, col = \"orange\", lwd = 2, lty = 2)\nlegend(\"topright\", legend = c(\"Exponentielle\", \"Log-Normale\"),\n       col = c(\"purple\", \"orange\"), lwd = 2, lty = c(1, 2))\n\n\n\n\n\n\n\n# Tracé de la densité Beta\nplot(x_beta, densite_beta, type = \"l\", lwd = 2, col = \"brown\",\n     main = \"Fonction de Densité de la Distribution Beta\",\n     xlab = \"Valeurs\", ylab = \"Densité\")\ngrid()\n\n\n\n\n\n\n\n\nInterprétation : Les graphiques comparatifs montrent les différences entre les distributions normales, t de Student, exponentielles, log-normales et Beta, mettant en évidence leurs formes, leurs asymétries et leurs applications potentielles en économétrie financière.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Les Fonctions de Densité</span>"
+    ]
+  },
+  {
+    "objectID": "Density.html#fonction-de-densité-multivariée",
+    "href": "Density.html#fonction-de-densité-multivariée",
+    "title": "2  Les Fonctions de Densité",
+    "section": "2.8 Fonction de Densité Multivariée",
+    "text": "2.8 Fonction de Densité Multivariée\nEn économétrie financière, il est souvent nécessaire de travailler avec des distributions multivariées, telles que la distribution normale multivariée, pour modéliser les relations entre plusieurs variables financières.\n\n2.8.1 Génération et Tracé de la Densité Normale Multivariée\n\n# Installation et chargement du package nécessaire\nif(!require(MASS)) {\n  install.packages(\"MASS\")\n  library(MASS)\n}\n\n# Paramètres de la distribution normale multivariée\nmu &lt;- c(0, 0)  # Moyennes\nSigma &lt;- matrix(c(1, 0.5, 0.5, 1), nrow = 2)  # Matrice de covariance\n\n# Génération de données simulées\nset.seed(789)\ndata_mvnorm &lt;- mvrnorm(n = 500, mu = mu, Sigma = Sigma)\n\n# Tracé des données\nplot(data_mvnorm, main = \"Données Simulées - Normale Multivariée\",\n     xlab = \"Variable 1\", ylab = \"Variable 2\", col = rgb(0, 0, 1, 0.5))\ngrid()\n\n\n\n\n\n\n\n\nInterprétation : Les données simulées suivent une distribution normale multivariée avec une corrélation de 0.5 entre les deux variables, ce qui est visible dans la forme ellipsoïdale des données.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Les Fonctions de Densité</span>"
+    ]
+  },
+  {
+    "objectID": "Density.html#conclusion",
+    "href": "Density.html#conclusion",
+    "title": "2  Les Fonctions de Densité",
+    "section": "2.9 Conclusion",
+    "text": "2.9 Conclusion\nCette section a couvert les principales fonctions de densité de probabilité utilisées en économétrie financière. En maîtrisant ces fonctions et leur manipulation en R, vous serez mieux équipé pour modéliser, analyser et interpréter les données financières. Les exemples pratiques présentés ici illustrent comment générer, visualiser et comparer différentes distributions, ce qui est essentiel pour développer des modèles économétriques robustes et pertinents.\nN’hésitez pas à explorer davantage ces fonctions en modifiant les paramètres et en expérimentant avec d’autres distributions pour approfondir votre compréhension.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Les Fonctions de Densité</span>"
+    ]
+  },
+  {
+    "objectID": "moment.html",
+    "href": "moment.html",
+    "title": "3  Les Caractéristiques des Distributions de Probabilités",
+    "section": "",
+    "text": "3.1 Moments de Base\nLes moments de base décrivent les propriétés centrales d’une distribution de probabilité. Les principaux moments que nous aborderons sont :",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Les Caractéristiques des Distributions de Probabilités</span>"
+    ]
+  },
+  {
+    "objectID": "moment.html#moments-de-base",
+    "href": "moment.html#moments-de-base",
+    "title": "3  Les Caractéristiques des Distributions de Probabilités",
+    "section": "",
+    "text": "Moyenne ( \\(\\mu\\) ) : La valeur attendue ou moyenne de la distribution.\nMédiane : La valeur qui sépare la distribution en deux parties égales.\nMode : La valeur la plus fréquente dans la distribution.\nVariance ( \\(\\sigma^2\\) ) : La mesure de la dispersion des valeurs autour de la moyenne.\nÉcart-type ( \\(\\sigma\\)) : La racine carrée de la variance, indiquant la dispersion des données.\n\n\n3.1.1 Calcul des Moments de Base\n\n# Exemple avec une distribution normale\nmu &lt;- 0        # Moyenne\nsigma &lt;- 1     # Écart-type\nn &lt;- 1000      # Nombre d'observations\n\n# Génération des données\nset.seed(123)\ndata_normale &lt;- rnorm(n, mean = mu, sd = sigma)\n\n# Calcul des moments de base\nmoyenne &lt;- mean(data_normale)\nmediane &lt;- median(data_normale)\nmode_val &lt;- as.numeric(names(sort(table(round(data_normale, 2)), decreasing = TRUE)[1]))\nvariance &lt;- var(data_normale)\necart_type &lt;- sd(data_normale)\n\n# Affichage des résultats\ncat(\"Moyenne :\", moyenne, \"\\n\")\n\nMoyenne : 0.01612787 \n\ncat(\"Médiane :\", mediane, \"\\n\")\n\nMédiane : 0.009209639 \n\ncat(\"Mode :\", mode_val, \"\\n\")\n\nMode : -0.21 \n\ncat(\"Variance :\", variance, \"\\n\")\n\nVariance : 0.9834589 \n\ncat(\"Écart-type :\", ecart_type, \"\\n\")\n\nÉcart-type : 0.991695 \n\n\nExplications : - mean() : Calcule la moyenne des données. - median() : Calcule la médiane des données. - mode_val : Estime le mode en arrondissant les données et en identifiant la valeur la plus fréquente. - var() : Calcule la variance des données. - sd() : Calcule l’écart-type des données.\n\n\n3.1.2 Visualisation des Moments de Base\n\n# Tracé de l'histogramme avec lignes représentant les moments\nhist(data_normale, breaks = 30, probability = TRUE,\n     main = \"Histogramme de la Distribution Normale avec Moments\",\n     xlab = \"Valeurs\", col = \"lightblue\", border = \"black\")\nabline(v = moyenne, col = \"red\", lwd = 4, lty = 1)    # Moyenne\nabline(v = mediane, col = \"green\", lwd = 4, lty = 2)   # Médiane\nabline(v = mode_val, col = \"purple\", lwd = 4, lty = 3) # Mode\nlegend(\"topright\", legend = c(\"Moyenne\", \"Médiane\", \"Mode\"),\n       col = c(\"red\", \"green\", \"purple\"), lwd = 2, lty = 1:3)\n\n\n\n\n\n\n\n\nInterprétation : L’histogramme montre la distribution des données avec des lignes indiquant la moyenne, la médiane et le mode, permettant de visualiser la centralité et la symétrie de la distribution.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Les Caractéristiques des Distributions de Probabilités</span>"
+    ]
+  },
+  {
+    "objectID": "moment.html#asymétrie-et-aplatissement",
+    "href": "moment.html#asymétrie-et-aplatissement",
+    "title": "3  Les Caractéristiques des Distributions de Probabilités",
+    "section": "3.2 Asymétrie et Aplatissement",
+    "text": "3.2 Asymétrie et Aplatissement\nDeux caractéristiques avancées des distributions sont l’asymétrie (skewness) et l’aplatissement (kurtosis). Ces mesures fournissent des informations supplémentaires sur la forme de la distribution.\n\nAsymétrie (Skewness) : Mesure de la symétrie de la distribution.\n\nSkewness positive : Queue à droite plus longue.\nSkewness négative : Queue à gauche plus longue.\n\nAplatissement (Kurtosis) : Mesure de la “taille” des queues de la distribution.\n\nKurtosis élevée : Plus de valeurs extrêmes.\nKurtosis faible : Moins de valeurs extrêmes.\n\n\n\n3.2.1 Calcul de l’Asymétrie et de l’Aplatissement\nPour calculer l’asymétrie et l’aplatissement, nous utiliserons le package moments.\n\n# Installation et chargement du package 'moments' si nécessaire\nif(!require(moments)) {\n  install.packages(\"moments\")\n  library(moments)\n}\n\n# Calcul de l'asymétrie et de l'aplatissement\nasymetrie &lt;- skewness(data_normale)\naplatissement &lt;- kurtosis(data_normale)\n\n# Affichage des résultats\ncat(\"Asymétrie :\", asymetrie, \"\\n\")\n\nAsymétrie : 0.06529391 \n\ncat(\"Aplatissement :\", aplatissement, \"\\n\")\n\nAplatissement : 2.925747 \n\n\nExplications : - skewness() : Calcule l’asymétrie de la distribution. - kurtosis() : Calcule l’aplatissement de la distribution. - Une asymétrie proche de 0 indique une distribution symétrique. - Une kurtosis proche de 3 indique une distribution similaire à la normale (mesure de référence).\n\n\n3.2.2 Visualisation de l’Asymétrie et de l’Aplatissement\n\n# Tracé de la densité avec annotations pour l'asymétrie et l'aplatissement\nplot(density(data_normale), main = \"Densité avec Asymétrie et Aplatissement\",\n     xlab = \"Valeurs\", ylab = \"Densité\", lwd = 2, col = \"blue\")\nlegend(\"topright\", legend = c(paste(\"Asymétrie :\", round(asymetrie, 2)),\n                              paste(\"Aplatissement :\", round(aplatissement, 2))),\n       bty = \"n\")\n\n\n\n\n\n\n\n\nInterprétation : Le graphique de densité montre la forme générale de la distribution avec des annotations indiquant l’asymétrie et l’aplatissement, facilitant ainsi l’interprétation des caractéristiques de la distribution.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Les Caractéristiques des Distributions de Probabilités</span>"
+    ]
+  },
+  {
+    "objectID": "moment.html#mesures-de-position-et-de-dispersion",
+    "href": "moment.html#mesures-de-position-et-de-dispersion",
+    "title": "3  Les Caractéristiques des Distributions de Probabilités",
+    "section": "3.3 Mesures de Position et de Dispersion",
+    "text": "3.3 Mesures de Position et de Dispersion\nOutre les moments de base, il existe d’autres mesures importantes pour décrire la position et la dispersion des données.\n\nQuartiles : Divisent les données en quatre parties égales.\n\nPremier quartile (Q1) : 25% des données sont en dessous.\nDeuxième quartile (Q2) : Médiane.\nTroisième quartile (Q3) : 75% des données sont en dessous.\n\nÉcart Interquartile (IQR) : Différence entre Q3 et Q1.\nRange : Différence entre la valeur maximale et minimale.\n\n\n3.3.1 Calcul des Quartiles, IQR et Range\n\n# Calcul des quartiles\nquartiles &lt;- quantile(data_normale, probs = c(0.25, 0.5, 0.75))\nQ1 &lt;- quartiles[1]\nQ2 &lt;- quartiles[2]  # Médiane\nQ3 &lt;- quartiles[3]\n\n# Calcul de l'écart interquartile (IQR)\niqr_val &lt;- IQR(data_normale)\n\n# Calcul du range\nrange_val &lt;- range(data_normale)\nrange_diff &lt;- diff(range_val)\n\n# Affichage des résultats\ncat(\"Premier quartile (Q1) :\", Q1, \"\\n\")\n\nPremier quartile (Q1) : -0.6283242 \n\ncat(\"Médiane (Q2) :\", Q2, \"\\n\")\n\nMédiane (Q2) : 0.009209639 \n\ncat(\"Troisième quartile (Q3) :\", Q3, \"\\n\")\n\nTroisième quartile (Q3) : 0.6646019 \n\ncat(\"Écart Interquartile (IQR) :\", iqr_val, \"\\n\")\n\nÉcart Interquartile (IQR) : 1.292926 \n\ncat(\"Range : [\", range_val[1], \", \", range_val[2], \"]\\n\")\n\nRange : [ -2.809775 ,  3.24104 ]\n\ncat(\"Différence du Range :\", range_diff, \"\\n\")\n\nDifférence du Range : 6.050815 \n\n\nInterprétation :\nPremier quartile (Q1) : -0.6596063 \nMédiane (Q2) : 0.01164503 \nTroisième quartile (Q3) : 0.6916845 \nÉcart Interquartile (IQR) : 1.3512908 \nRange : [ -3.025713,  3.020785 ] \nDifférence du Range : 6.046498 \nExplications : - quantile() : Calcule les quartiles spécifiés. - IQR() : Calcule l’écart interquartile. - range() et diff() : Calculent l’intervalle et la différence entre les valeurs maximales et minimales.\n\n\n3.3.2 Visualisation des Quartiles et du Range avec Boxplot\n\n# Tracé du boxplot\nboxplot(data_normale, main = \"Boxplot de la Distribution Normale\",\n        ylab = \"Valeurs\", col = \"lightgreen\", border = \"darkgreen\")\n\n# Ajout des annotations\nabline(h = Q1, col = \"blue\", lwd = 2, lty = 2)  # Q1\nabline(h = Q2, col = \"red\", lwd = 2, lty = 2)   # Médiane\nabline(h = Q3, col = \"blue\", lwd = 2, lty = 2)  # Q3\nlegend(\"topright\", legend = c(\"Q1\", \"Médiane\", \"Q3\"),\n       col = c(\"blue\", \"red\", \"blue\"), lwd = 2, lty = 2, bty = \"n\")\n\n\n\n\n\n\n\n\nInterprétation : Le boxplot visualise les quartiles, l’écart interquartile et les valeurs extrêmes de la distribution, offrant une représentation graphique claire des mesures de position et de dispersion.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Les Caractéristiques des Distributions de Probabilités</span>"
+    ]
+  },
+  {
+    "objectID": "moment.html#coefficient-de-corrélation",
+    "href": "moment.html#coefficient-de-corrélation",
+    "title": "3  Les Caractéristiques des Distributions de Probabilités",
+    "section": "3.4 Coefficient de Corrélation",
+    "text": "3.4 Coefficient de Corrélation\nEn économétrie financière, il est souvent important de mesurer la relation entre deux variables aléatoires. Le coefficient de corrélation est une mesure statistique qui indique la force et la direction de cette relation.\n\n3.4.1 Calcul du Coefficient de Corrélation\n\n# Génération de deux distributions normales corrélées\nlibrary(MASS)\nmu &lt;- c(0, 0)\nSigma &lt;- matrix(c(1, 0.7, 0.7, 1), nrow = 2)  # Matrice de covariance avec corrélation 0.7\nset.seed(456)\ndata_corr &lt;- mvrnorm(n = 1000, mu = mu, Sigma = Sigma)\n\n# Calcul du coefficient de corrélation\ncorrelation &lt;- cor(data_corr[,1], data_corr[,2])\n\n# Affichage du résultat\ncat(\"Coefficient de corrélation :\", correlation, \"\\n\")\n\nCoefficient de corrélation : 0.688052 \n\n\nInterprétation :\nCoefficient de corrélation : 0.705956 \nExplications : - mvrnorm() : Génère des données suivant une distribution normale multivariée avec une corrélation spécifiée. - cor() : Calcule le coefficient de corrélation entre les deux variables.\n\n\n3.4.2 Visualisation de la Corrélation avec un Scatter Plot\n\n# Tracé du scatter plot\nplot(data_corr[,1], data_corr[,2],\n     main = paste(\"Scatter Plot avec Corrélation =\", round(correlation, 2)),\n     xlab = \"Variable 1\", ylab = \"Variable 2\",\n     pch = 19, col = rgb(0, 0, 1, 0.5))\nabline(lm(data_corr[,2] ~ data_corr[,1]), col = \"red\", lwd = 2)\ngrid()\n\n\n\n\n\n\n\n\nInterprétation : Le scatter plot montre la relation linéaire entre les deux variables, avec une ligne de régression rouge illustrant la corrélation positive forte.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Les Caractéristiques des Distributions de Probabilités</span>"
+    ]
+  },
+  {
+    "objectID": "moment.html#mesures-de-forme-avancées",
+    "href": "moment.html#mesures-de-forme-avancées",
+    "title": "3  Les Caractéristiques des Distributions de Probabilités",
+    "section": "3.5 Mesures de Forme Avancées",
+    "text": "3.5 Mesures de Forme Avancées\nOutre l’asymétrie et l’aplatissement, il existe d’autres mesures de forme qui peuvent être pertinentes en fonction des besoins de l’analyse.\n\nMoment central : Mesure des caractéristiques de la distribution centrée autour de la moyenne.\nFonction de répartition cumulative (CDF) : La probabilité qu’une variable aléatoire soit inférieure ou égale à une certaine valeur.\nFonction de répartition inverse (Quantile) : La valeur telle que la proportion spécifiée des données est inférieure ou égale à cette valeur.\n\n\n3.5.1 Calcul de la Fonction de Répartition Cumulative (CDF)\n\n# Calcul de la CDF pour une séquence de valeurs\nx_seq &lt;- seq(min(data_normale), max(data_normale), length.out = 1000)\ncdf_normale &lt;- pnorm(x_seq, mean = mu, sd = sigma)\n\n# Tracé de la CDF\nplot(x_seq, cdf_normale, type = \"l\", lwd = 2, col = \"darkblue\",\n     main = \"Fonction de Répartition Cumulative (CDF) de la Normale\",\n     xlab = \"Valeurs\", ylab = \"Probabilité\")\ngrid()\n\n\n\n\n\n\n\n\nInterprétation : La CDF montre l’accumulation de la probabilité jusqu’à chaque valeur de ( x ), illustrant la distribution cumulative des données.\n\n\n3.5.2 Calcul de la Fonction de Quantile\n\n# Calcul des quantiles\nquantiles &lt;- quantile(data_normale, probs = c(0.1, 0.5, 0.9))\nQ10 &lt;- quantiles[1]\nQ50 &lt;- quantiles[2]  # Médiane\nQ90 &lt;- quantiles[3]\n\n# Affichage des résultats\ncat(\"10ème quantile :\", Q10, \"\\n\")\n\n10ème quantile : -1.267328 \n\ncat(\"50ème quantile (Médiane) :\", Q50, \"\\n\")\n\n50ème quantile (Médiane) : 0.009209639 \n\ncat(\"90ème quantile :\", Q90, \"\\n\")\n\n90ème quantile : 1.254752 \n\n\nInterprétation :\n10ème quantile : -1.265071 \n50ème quantile (Médiane) : 0.01164503 \n90ème quantile : 1.271206 \nExplications : Les quantiles fournissent des points de référence pour la distribution des données, utiles pour identifier des seuils spécifiques.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Les Caractéristiques des Distributions de Probabilités</span>"
+    ]
+  },
+  {
+    "objectID": "moment.html#visualisation-des-caractéristiques-avec-ggplot2",
+    "href": "moment.html#visualisation-des-caractéristiques-avec-ggplot2",
+    "title": "3  Les Caractéristiques des Distributions de Probabilités",
+    "section": "3.6 Visualisation des Caractéristiques avec ggplot2",
+    "text": "3.6 Visualisation des Caractéristiques avec ggplot2\nLe package ggplot2 offre des outils puissants pour visualiser les caractéristiques des distributions de manière élégante et informative.\n\n3.6.1 Histogramme avec Densité et Quartiles\n\n# Installation et chargement de ggplot2 si nécessaire\nif(!require(ggplot2)) {\n  install.packages(\"ggplot2\")\n  library(ggplot2)\n}\n\n# Création d'un data frame\ndf &lt;- data.frame(Valeurs = data_normale)\n\n# Tracé avec ggplot2\nggplot(df, aes(x = Valeurs)) +\n  geom_histogram(aes(y = ..density..), bins = 30, fill = \"lightblue\", color = \"black\", alpha = 0.6) +\n  geom_density(color = \"red\", size = 1) +\n  geom_vline(aes(xintercept = moyenne), color = \"blue\", linetype = \"dashed\", size = 1) +\n  geom_vline(aes(xintercept = mediane), color = \"green\", linetype = \"dotted\", size = 1) +\n  labs(title = \"Histogramme avec Densité et Quartiles\",\n       x = \"Valeurs\", y = \"Densité\") +\n  theme_minimal() +\n  theme(plot.title = element_text(hjust = 0.5)) +\n  annotate(\"text\", x = moyenne, y = max(density(data_normale)$y)*0.9, label = \"Moyenne\", color = \"blue\", angle = 90, vjust = -0.5) +\n  annotate(\"text\", x = mediane, y = max(density(data_normale)$y)*0.8, label = \"Médiane\", color = \"green\", angle = 90, vjust = -0.5)\n\n\n\n\n\n\n\n\nInterprétation : Le graphique combine un histogramme, une courbe de densité et des lignes verticales indiquant la moyenne et la médiane, offrant une vue d’ensemble complète des caractéristiques de la distribution.\n\n\n3.6.2 Boxplot avec ggplot2\n\n# Tracé du boxplot avec ggplot2\nggplot(df, aes(y = Valeurs)) +\n  geom_boxplot(fill = \"lightgreen\", color = \"darkgreen\") +\n  labs(title = \"Boxplot de la Distribution Normale\",\n       y = \"Valeurs\") +\n  theme_minimal() +\n  theme(plot.title = element_text(hjust = 0.5))\n\n\n\n\n\n\n\n\nInterprétation : Le boxplot affiche les quartiles, l’écart interquartile, et les valeurs extrêmes, fournissant une représentation visuelle de la dispersion et de la symétrie des données.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Les Caractéristiques des Distributions de Probabilités</span>"
+    ]
+  },
+  {
+    "objectID": "moment.html#mesures-de-forme-pour-distributions-non-normales",
+    "href": "moment.html#mesures-de-forme-pour-distributions-non-normales",
+    "title": "3  Les Caractéristiques des Distributions de Probabilités",
+    "section": "3.7 Mesures de Forme pour Distributions Non-Normales",
+    "text": "3.7 Mesures de Forme pour Distributions Non-Normales\nCertaines distributions présentent des caractéristiques spécifiques qui nécessitent des mesures adaptées.\n\n3.7.1 Distribution Exponentielle\n\n# Paramètres de la distribution exponentielle\nrate &lt;- 1  # Taux\ndata_exp &lt;- rexp(n, rate = rate)\n\n# Calcul des moments\nmoyenne_exp &lt;- mean(data_exp)\nvariance_exp &lt;- var(data_exp)\nskewness_exp &lt;- skewness(data_exp)\nkurtosis_exp &lt;- kurtosis(data_exp)\n\n# Affichage des résultats\ncat(\"Moyenne Exponentielle :\", moyenne_exp, \"\\n\")\n\nMoyenne Exponentielle : 0.9642288 \n\ncat(\"Variance Exponentielle :\", variance_exp, \"\\n\")\n\nVariance Exponentielle : 0.9382789 \n\ncat(\"Asymétrie Exponentielle :\", skewness_exp, \"\\n\")\n\nAsymétrie Exponentielle : 1.888473 \n\ncat(\"Aplatissement Exponentielle :\", kurtosis_exp, \"\\n\")\n\nAplatissement Exponentielle : 8.267431 \n\n\nInterprétation :\nMoyenne Exponentielle : 1.002765 \nVariance Exponentielle : 1.040628 \nAsymétrie Exponentielle : 2.017139 \nAplatissement Exponentielle : 6.04143 \nExplications : - La distribution exponentielle a une asymétrie positive élevée et un aplatissement supérieur à 3, indiquant des queues plus épaisses comparées à une distribution normale.\n\n\n3.7.2 Visualisation de la Distribution Exponentielle\n\n# Tracé de la densité exponentielle avec ggplot2\ndf_exp &lt;- data.frame(Valeurs = data_exp)\n\nggplot(df_exp, aes(x = Valeurs)) +\n  geom_histogram(aes(y = ..density..), bins = 30, fill = \"peachpuff\", color = \"black\", alpha = 0.6) +\n  geom_density(color = \"purple\", size = 1) +\n  labs(title = \"Histogramme et Densité de la Distribution Exponentielle\",\n       x = \"Valeurs\", y = \"Densité\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\nInterprétation : Le graphique montre un histogramme avec la courbe de densité exponentielle superposée, illustrant la forte asymétrie et les queues épaisses de la distribution.\n\n\n3.7.3 Conclusion\nCette section a couvert les principales caractéristiques des distributions de probabilités, incluant les moments de base, l’asymétrie, l’aplatissement, et d’autres mesures de forme. En maîtrisant ces concepts et en utilisant les outils fournis par R, vous serez mieux équipé pour analyser et interpréter les distributions des variables financières. Ces compétences sont cruciales pour le développement et l’évaluation de modèles économétriques robustes et pertinents dans le domaine de la finance.\nN’hésitez pas à expérimenter avec différentes distributions et paramètres pour approfondir votre compréhension et affiner vos compétences analytiques.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Les Caractéristiques des Distributions de Probabilités</span>"
+    ]
+  },
+  {
+    "objectID": "matrice.html",
+    "href": "matrice.html",
+    "title": "4  Algèbre Matricielle",
+    "section": "",
+    "text": "4.1 Introduction aux Matrices\nUne matrice est un tableau rectangulaire de nombres organisé en lignes et en colonnes. Les matrices sont utilisées pour représenter des données, des systèmes d’équations linéaires, et des transformations linéaires.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Algèbre Matricielle</span>"
+    ]
+  },
+  {
+    "objectID": "matrice.html#introduction-aux-matrices",
+    "href": "matrice.html#introduction-aux-matrices",
+    "title": "4  Algèbre Matricielle",
+    "section": "",
+    "text": "4.1.1 Création de Matrices en R\n\n# Création d'une matrice à partir d'un vecteur\n# Par exemple, une matrice 3x3\nelements &lt;- 1:9\nmatrice_3x3 &lt;- matrix(elements, nrow = 3, ncol = 3, byrow = TRUE)\nprint(\"Matrice 3x3 :\")\n\n[1] \"Matrice 3x3 :\"\n\nprint(matrice_3x3)\n\n     [,1] [,2] [,3]\n[1,]    1    2    3\n[2,]    4    5    6\n[3,]    7    8    9\n\n# Création d'une matrice en spécifiant les noms des lignes et des colonnes\nmatrice_nommee &lt;- matrix(elements, nrow = 3, ncol = 3, byrow = TRUE,\n                         dimnames = list(c(\"Ligne1\", \"Ligne2\", \"Ligne3\"),\n                                         c(\"Col1\", \"Col2\", \"Col3\")))\nprint(\"Matrice Nommée :\")\n\n[1] \"Matrice Nommée :\"\n\nprint(matrice_nommee)\n\n       Col1 Col2 Col3\nLigne1    1    2    3\nLigne2    4    5    6\nLigne3    7    8    9\n\n\nInterprétation : - matrix() : Fonction utilisée pour créer une matrice en R. - byrow = TRUE : Remplit la matrice par lignes plutôt que par colonnes. - dimnames : Attribue des noms aux lignes et aux colonnes pour une meilleure lisibilité.\n\n\n4.1.2 Opérations de Base sur les Matrices\n\n4.1.2.0.1 Addition et Soustraction de Matrices\n\n# Création de deux matrices 2x2\nA &lt;- matrix(c(1, 2, 3, 4), nrow = 2, byrow = TRUE)\nB &lt;- matrix(c(5, 6, 7, 8), nrow = 2, byrow = TRUE)\n\nprint(\"Matrice A :\")\n\n[1] \"Matrice A :\"\n\nprint(A)\n\n     [,1] [,2]\n[1,]    1    2\n[2,]    3    4\n\nprint(\"Matrice B :\")\n\n[1] \"Matrice B :\"\n\nprint(B)\n\n     [,1] [,2]\n[1,]    5    6\n[2,]    7    8\n\n# Addition de matrices\nC_add &lt;- A + B\nprint(\"Addition de A + B :\")\n\n[1] \"Addition de A + B :\"\n\nprint(C_add)\n\n     [,1] [,2]\n[1,]    6    8\n[2,]   10   12\n\n# Soustraction de matrices\nC_sub &lt;- A - B\nprint(\"Soustraction de A - B :\")\n\n[1] \"Soustraction de A - B :\"\n\nprint(C_sub)\n\n     [,1] [,2]\n[1,]   -4   -4\n[2,]   -4   -4\n\n\nInterprétation : - Les opérations d’addition et de soustraction sont effectuées élément par élément lorsque les matrices sont de mêmes dimensions.\n\n\n\n4.1.3 Multiplication de Matrices\n\n# Multiplication élément par élément\nC_elem_mult &lt;- A * B\nprint(\"Multiplication Élément par Élément de A * B :\")\n\n[1] \"Multiplication Élément par Élément de A * B :\"\n\nprint(C_elem_mult)\n\n     [,1] [,2]\n[1,]    5   12\n[2,]   21   32\n\n# Multiplication matricielle\nC_mat_mult &lt;- A %*% B\nprint(\"Multiplication Matricielle de A %*% B :\")\n\n[1] \"Multiplication Matricielle de A %*% B :\"\n\nprint(C_mat_mult)\n\n     [,1] [,2]\n[1,]   19   22\n[2,]   43   50\n\n\nInterprétation : - A * B : Effectue une multiplication élément par élément (Hadamard). - **A %*% B** : Effectue une multiplication matricielle classique.\n\n\n4.1.4 Transposition de Matrices\n\n# Transposition de la matrice A\nA_transpose &lt;- t(A)\nprint(\"Transposition de la Matrice A :\")\n\n[1] \"Transposition de la Matrice A :\"\n\nprint(A_transpose)\n\n     [,1] [,2]\n[1,]    1    3\n[2,]    2    4\n\n\nInterprétation : - t() : Fonction utilisée pour transposer une matrice, échangeant les lignes et les colonnes.\n\n\n4.1.5 Inversion de Matrices\n\n# Création d'une matrice 2x2 inversible\nD &lt;- matrix(c(4, 7, 2, 6), nrow = 2, byrow = TRUE)\nprint(\"Matrice D :\")\n\n[1] \"Matrice D :\"\n\nprint(D)\n\n     [,1] [,2]\n[1,]    4    7\n[2,]    2    6\n\n# Calcul de l'inverse de D\nD_inverse &lt;- solve(D)\nprint(\"Inverse de la Matrice D :\")\n\n[1] \"Inverse de la Matrice D :\"\n\nprint(D_inverse)\n\n     [,1] [,2]\n[1,]  0.6 -0.7\n[2,] -0.2  0.4\n\n# Vérification de l'inversion (D * D_inverse devrait être l'identité)\nidentite &lt;- D %*% D_inverse\nprint(\"Produit de D et D_inverse (Doit être l'Identité) :\")\n\n[1] \"Produit de D et D_inverse (Doit être l'Identité) :\"\n\nprint(identite)\n\n              [,1]          [,2]\n[1,]  1.000000e+00 -1.110223e-16\n[2,] -1.110223e-16  1.000000e+00\n\n\nInterprétation : - solve() : Fonction utilisée pour calculer l’inverse d’une matrice. - La multiplication d’une matrice par son inverse doit donner la matrice identité.\n\n\n4.1.6 Calcul du Déterminant\n\n# Calcul du déterminant de la matrice D\ndeterminant_D &lt;- det(D)\nprint(paste(\"Déterminant de la Matrice D :\", determinant_D))\n\n[1] \"Déterminant de la Matrice D : 10\"\n\n\nInterprétation : - det() : Fonction utilisée pour calculer le déterminant d’une matrice. - Un déterminant non nul indique qu’une matrice est inversible.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Algèbre Matricielle</span>"
+    ]
+  },
+  {
+    "objectID": "matrice.html#systèmes-linéaires",
+    "href": "matrice.html#systèmes-linéaires",
+    "title": "4  Algèbre Matricielle",
+    "section": "4.2 Systèmes Linéaires",
+    "text": "4.2 Systèmes Linéaires\nLes systèmes d’équations linéaires sont couramment rencontrés en économétrie pour estimer des paramètres et analyser des relations entre variables.\n\n4.2.1 Résolution d’un Système Linéaire\nConsidérons le système suivant : [\n\\[\\begin{cases}\n2x + 3y = 8 \\\\\n5x + y = 7\n\\end{cases}\\]\n]\n\n# Définition des coefficients du système\nA_sys &lt;- matrix(c(2, 3,\n                  5, 1), nrow = 2, byrow = TRUE)\nb_sys &lt;- c(8, 7)\n\nprint(\"Matrice des Coefficients A_sys :\")\n\n[1] \"Matrice des Coefficients A_sys :\"\n\nprint(A_sys)\n\n     [,1] [,2]\n[1,]    2    3\n[2,]    5    1\n\nprint(\"Vecteur des constantes b_sys :\")\n\n[1] \"Vecteur des constantes b_sys :\"\n\nprint(b_sys)\n\n[1] 8 7\n\n# Résolution du système linéaire A_sys * x = b_sys\nsolution &lt;- solve(A_sys, b_sys)\nprint(\"Solution du Système Linéaire :\")\n\n[1] \"Solution du Système Linéaire :\"\n\nprint(solution)\n\n[1] 1 2\n\n\nInterprétation : - A_sys : Matrice des coefficients des variables. - b_sys : Vecteur des constantes. - solve(A_sys, b_sys) : Fonction utilisée pour résoudre le système linéaire.\n\n\n4.2.2 Vérification de la Solution\n\n# Vérification : A_sys %*% solution doit être égal à b_sys\nverification &lt;- A_sys %*% solution\nprint(\"Vérification de la Solution (A_sys %*% solution) :\")\n\n[1] \"Vérification de la Solution (A_sys %*% solution) :\"\n\nprint(verification)\n\n     [,1]\n[1,]    8\n[2,]    7\n\nprint(\"Vecteur Original b_sys :\")\n\n[1] \"Vecteur Original b_sys :\"\n\nprint(b_sys)\n\n[1] 8 7\n\n\nInterprétation : - Le produit de la matrice des coefficients par la solution obtenue doit reproduire le vecteur des constantes, confirmant ainsi la validité de la solution.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Algèbre Matricielle</span>"
+    ]
+  },
+  {
+    "objectID": "matrice.html#valeurs-propres-et-vecteurs-propres",
+    "href": "matrice.html#valeurs-propres-et-vecteurs-propres",
+    "title": "4  Algèbre Matricielle",
+    "section": "4.3 Valeurs Propres et Vecteurs Propres",
+    "text": "4.3 Valeurs Propres et Vecteurs Propres\nLes valeurs propres et les vecteurs propres jouent un rôle crucial dans l’analyse des systèmes dynamiques, la réduction de dimensions, et l’optimisation des modèles économétriques.\n\n4.3.1 Calcul des Valeurs Propres et Vecteurs Propres\n\n# Création d'une matrice carrée 3x3\nE &lt;- matrix(c(4, 2, 1,\n              2, 4, 2,\n              1, 2, 4), nrow = 3, byrow = TRUE)\nprint(\"Matrice E :\")\n\n[1] \"Matrice E :\"\n\nprint(E)\n\n     [,1] [,2] [,3]\n[1,]    4    2    1\n[2,]    2    4    2\n[3,]    1    2    4\n\n# Calcul des valeurs propres et vecteurs propres\neigen_E &lt;- eigen(E)\nprint(\"Valeurs Propres de E :\")\n\n[1] \"Valeurs Propres de E :\"\n\nprint(eigen_E$values)\n\n[1] 7.372281 3.000000 1.627719\n\nprint(\"Vecteurs Propres de E :\")\n\n[1] \"Vecteurs Propres de E :\"\n\nprint(eigen_E$vectors)\n\n           [,1]          [,2]       [,3]\n[1,] -0.5417743 -7.071068e-01  0.4544013\n[2,] -0.6426206 -1.110223e-16 -0.7661846\n[3,] -0.5417743  7.071068e-01  0.4544013\n\n\nInterprétation : - eigen() : Fonction utilisée pour calculer les valeurs propres et les vecteurs propres d’une matrice. - Les valeurs propres indiquent les échelles de transformation, tandis que les vecteurs propres indiquent les directions invariantes sous cette transformation.\n\n\n4.3.2 Visualisation des Vecteurs Propres\n\n# Tracé des vecteurs propres dans le plan\nplot(eigen_E$vectors[,1], eigen_E$vectors[,2],\n     main = \"Vecteurs Propres de la Matrice E\",\n     xlab = \"Vecteur Propre 1\", ylab = \"Vecteur Propre 2\",\n     pch = 19, col = \"blue\", xlim = c(-1, 1), ylim = c(-1, 1))\nabline(v = 0, h = 0, col = \"gray\", lty = 2)\ntext(eigen_E$vectors[,1], eigen_E$vectors[,2],\n     labels = paste(\"v\", 1:3, sep = \"\"), pos = 3, col = \"red\")\ngrid()\n\n\n\n\n\n\n\n\nInterprétation : - Le graphique montre les vecteurs propres dans le plan, illustrant leurs directions et leurs relations géométriques.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Algèbre Matricielle</span>"
+    ]
+  },
+  {
+    "objectID": "matrice.html#conclusion",
+    "href": "matrice.html#conclusion",
+    "title": "4  Algèbre Matricielle",
+    "section": "4.4 Conclusion",
+    "text": "4.4 Conclusion\nL’algèbre matricielle est un outil indispensable en économétrie financière, permettant de manipuler des données complexes, d’estimer des modèles robustes, et d’analyser les relations entre variables financières. En maîtrisant les concepts et les techniques présentés dans cette section, vous serez mieux équipé pour aborder les défis analytiques rencontrés dans vos recherches et vos applications professionnelles.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Algèbre Matricielle</span>"
+    ]
+  },
+  {
+    "objectID": "return.html",
+    "href": "return.html",
+    "title": "5  Caractéristiques Empiriques des Séries Financières",
+    "section": "",
+    "text": "5.1 Visualisation des Séries Financières\nLa première étape dans l’analyse des séries financières consiste à visualiser les données pour identifier des tendances, des cycles, des anomalies ou des comportements particuliers.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Caractéristiques Empiriques des Séries Financières</span>"
+    ]
+  },
+  {
+    "objectID": "return.html#visualisation-des-séries-financières",
+    "href": "return.html#visualisation-des-séries-financières",
+    "title": "5  Caractéristiques Empiriques des Séries Financières",
+    "section": "",
+    "text": "5.1.1 Tracé des Prix et des Rendements\n\n# Installation et chargement des packages nécessaires\nif(!require(quantmod)) {\n  install.packages(\"quantmod\")\n  library(quantmod)\n}\n\nLoading required package: quantmod\n\n\nLoading required package: xts\n\n\nLoading required package: zoo\n\n\n\nAttaching package: 'zoo'\n\n\nThe following objects are masked from 'package:base':\n\n    as.Date, as.Date.numeric\n\n\nLoading required package: TTR\n\n\nRegistered S3 method overwritten by 'quantmod':\n  method            from\n  as.zoo.data.frame zoo \n\nif(!require(ggplot2)) {\n  install.packages(\"ggplot2\")\n  library(ggplot2)\n}\n\nLoading required package: ggplot2\n\n# Téléchargement des données financières (par exemple, S&P 500)\ngetSymbols(\"^GSPC\", src = \"yahoo\", from = \"2020-01-01\", to = \"2025-01-01\")\n\n[1] \"GSPC\"\n\nprix &lt;- Cl(GSPC)\n\n# Calcul des rendements log\nrendements &lt;- dailyReturn(prix, type = \"log\")\n\n# Tracé des prix\nautoplot(prix, main = \"Prix du S&P 500\", ylab = \"Prix\", xlab = \"Date\") +\n  theme_minimal()\n\n\n\n\n\n\n\n# Tracé des rendements\nautoplot(rendements, main = \"Rendements Log du S&P 500\", ylab = \"Rendement Log\", xlab = \"Date\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\nInterprétation : - Le graphique des prix montre l’évolution du SP 500 sur la période spécifiée. - Le graphique des rendements log révèle la variation quotidienne des prix, facilitant l’identification de la volatilité et des anomalies.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Caractéristiques Empiriques des Séries Financières</span>"
+    ]
+  },
+  {
+    "objectID": "return.html#statistiques-descriptives",
+    "href": "return.html#statistiques-descriptives",
+    "title": "5  Caractéristiques Empiriques des Séries Financières",
+    "section": "5.2 Statistiques Descriptives",
+    "text": "5.2 Statistiques Descriptives\nLes statistiques descriptives fournissent un résumé quantitatif des caractéristiques centrales et de la dispersion des séries financières.\nInterprétation : - Moyenne : Indique le rendement moyen quotidien. - Médiane : Représente le rendement central, moins sensible aux valeurs extrêmes. - Variance et Écart-type : Mesurent la dispersion des rendements autour de la moyenne. - Asymétrie : Indique la symétrie de la distribution des rendements. Une asymétrie positive suggère une queue à droite plus longue. - Aplatissement : Compare la “taille” des queues de la distribution par rapport à une distribution normale (kurtosis = 3).\nInterprétation : - L’histogramme permet de visualiser la distribution des rendements. - La courbe de densité superposée offre une estimation lisse de la distribution, facilitant l’identification de l’asymétrie et de l’aplatissement.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Caractéristiques Empiriques des Séries Financières</span>"
+    ]
+  },
+  {
+    "objectID": "return.html#stationnarité-et-tests-de-racine-unitaire",
+    "href": "return.html#stationnarité-et-tests-de-racine-unitaire",
+    "title": "5  Caractéristiques Empiriques des Séries Financières",
+    "section": "5.3 Stationnarité et Tests de Racine Unitaire",
+    "text": "5.3 Stationnarité et Tests de Racine Unitaire\nLa stationnarité est une propriété essentielle pour de nombreux modèles économétriques. Une série stationnaire a des propriétés statistiques constantes au fil du temps.\n\n5.3.1 Test de Dickey-Fuller Augmenté (ADF)\n\n# Installation et chargement du package 'tseries' si nécessaire\nif(!require(tseries)) {\n  install.packages(\"tseries\")\n  library(tseries)\n}\n\nLoading required package: tseries\n\n# Test ADF sur les rendements (qui sont généralement stationnaires)\nadf_rendements &lt;- adf.test(rendements, alternative = \"stationary\")\n\nWarning in adf.test(rendements, alternative = \"stationary\"): p-value smaller\nthan printed p-value\n\n# Affichage des résultats\nprint(adf_rendements)\n\n\n    Augmented Dickey-Fuller Test\n\ndata:  rendements\nDickey-Fuller = -10.02, Lag order = 10, p-value = 0.01\nalternative hypothesis: stationary\n\n\nInterprétation : - Hypothèse Nulle (H0) : La série a une racine unitaire (non stationnaire). - Hypothèse Alternative (H1) : La série est stationnaire. - Si la p-valeur est faible (généralement &lt; 0.05), on rejette H0 et conclut que la série est stationnaire.\n\n\n5.3.2 Test de KPSS\n\n# Installation et chargement du package 'tseries' si nécessaire\nif(!require(tseries)) {\n  install.packages(\"tseries\")\n  library(tseries)\n}\n\n# Test KPSS sur les rendements\nkpss_rendements &lt;- kpss.test(rendements, null = \"Level\")\n\nWarning in kpss.test(rendements, null = \"Level\"): p-value greater than printed\np-value\n\n# Affichage des résultats\nprint(kpss_rendements)\n\n\n    KPSS Test for Level Stationarity\n\ndata:  rendements\nKPSS Level = 0.065383, Truncation lag parameter = 7, p-value = 0.1\n\n\nInterprétation : - Hypothèse Nulle (H0) : La série est stationnaire. - Hypothèse Alternative (H1) : La série a une racine unitaire (non stationnaire). - Si la p-valeur est faible, on rejette H0 et conclut que la série n’est pas stationnaire.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Caractéristiques Empiriques des Séries Financières</span>"
+    ]
+  },
+  {
+    "objectID": "return.html#autocorrélation-et-fonction-dautocorrélation",
+    "href": "return.html#autocorrélation-et-fonction-dautocorrélation",
+    "title": "5  Caractéristiques Empiriques des Séries Financières",
+    "section": "5.4 Autocorrélation et Fonction d’Autocorrélation",
+    "text": "5.4 Autocorrélation et Fonction d’Autocorrélation\nL’autocorrélation mesure la corrélation d’une série avec ses propres valeurs décalées dans le temps. Elle est cruciale pour identifier la dépendance temporelle.\n\n5.4.1 Fonction d’Autocorrélation (ACF) et Autocorrélation Partielle (PACF)\n\n# Tracé de la fonction d'autocorrélation (ACF)\nacf(rendements, main = \"Fonction d'Autocorrélation des Rendements Log du S&P 500\")\n\n\n\n\n\n\n\n# Tracé de la fonction d'autocorrélation partielle (PACF)\npacf(rendements, main = \"Fonction d'Autocorrélation Partielle des Rendements Log du S&P 500\")\n\n\n\n\n\n\n\n\nInterprétation : - ACF : Montre la corrélation des rendements avec leurs propres décalages. Des valeurs significatives aux premiers lags peuvent indiquer une dépendance temporelle. - PACF : Montre la corrélation des rendements avec leurs propres décalages, en contrôlant pour les corrélations intermédiaires. Utile pour identifier l’ordre d’un modèle AR.\n\n\n5.4.2 Analyse de l’ACF et PACF\n\nModèles AR (AutoRégressifs) : Présentent une décroissance lente dans l’ACF et une coupure après un certain lag dans le PACF.\nModèles MA (Moyenne Mobile) : Présentent une coupure dans l’ACF et une décroissance lente dans le PACF.\nModèles ARMA/ARIMA : Combinaison des caractéristiques des modèles AR et MA.\n\n\n\n5.4.3 Test de Normalité (Shapiro-Wilk)\n\n# Test de normalité Shapiro-Wilk\n# Note : Ce test est sensible aux grandes tailles d'échantillon et peut rejeter la normalité même si les déviations sont minimes\nshapiro_test &lt;- shapiro.test(coredata(rendements)[1:500])  # Limiter à 500 observations pour éviter l'erreur sur de grands échantillons\n\n# Affichage des résultats\nprint(shapiro_test)\n\n\n    Shapiro-Wilk normality test\n\ndata:  coredata(rendements)[1:500]\nW = 0.80517, p-value &lt; 2.2e-16\n\n\nInterprétation : - Hypothèse Nulle (H0) : Les données suivent une distribution normale. - Hypothèse Alternative (H1) : Les données ne suivent pas une distribution normale.\nAvec un grand nombre d’observations, le test tend à rejeter H0 même pour de petites déviations de la normalité.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Caractéristiques Empiriques des Séries Financières</span>"
+    ]
+  },
+  {
+    "objectID": "return.html#conclusion",
+    "href": "return.html#conclusion",
+    "title": "5  Caractéristiques Empiriques des Séries Financières",
+    "section": "5.5 Conclusion",
+    "text": "5.5 Conclusion\nL’analyse des caractéristiques empiriques des séries financières est fondamentale pour développer des modèles économétriques efficaces et précis. En maîtrisant les techniques de visualisation, les tests de stationnarité, l’analyse de l’autocorrélation, la modélisation de la volatilité, et l’examen des distributions des rendements, vous serez mieux équipé pour interpréter les données financières et prendre des décisions éclairées. Les exemples pratiques et les implémentations en R présentés dans cette section fournissent une base solide pour approfondir votre compréhension et application des concepts en économétrie financière.\nN’hésitez pas à expérimenter avec différentes séries financières, à ajuster les paramètres des modèles, et à explorer d’autres techniques avancées pour enrichir votre analyse.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Caractéristiques Empiriques des Séries Financières</span>"
+    ]
+  }
+]
